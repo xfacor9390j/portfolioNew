@@ -70,6 +70,11 @@ const SoftBox = styled(Box)(({ theme }) => ({
     minWidth: "15%",
     margin: "3rem",
   },
+  [theme.breakpoints.between("lg", "xl")]: {
+    minHeight: "15%",
+    minWidth: "30%",
+    margin: "3rem",
+  },
 }));
 const IconsBox = styled(Box)(() => ({
   height: "15%",
