@@ -15,7 +15,7 @@ export default function CardComponent(props: example) {
       sx={{
         display: "flex",
         justifyContent: "center",
-       
+        marginInline: "2rem",
       }}
     >
       <Card

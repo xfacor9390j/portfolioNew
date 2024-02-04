@@ -11,11 +11,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useInView } from "react-intersection-observer";
 import Fade from "@mui/material/Fade";
 import Grow from "@mui/material/Grow";
+import useMediaQuery from "@mui/material/useMediaQuery";
 const theme = createTheme();
 
 theme.typography.h1 = {
   [theme.breakpoints.between("xs", "sm")]: {
-    fontSize: "4rem",
+    fontSize: "2rem",
   },
   [theme.breakpoints.between("sm", "md")]: {
     fontSize: "5.5rem",
@@ -28,10 +29,9 @@ theme.typography.h1 = {
   },
 };
 theme.typography.h4 = {
-  marginInline: "1rem",
   [theme.breakpoints.between("xs", "sm")]: {
     fontSize: "1.5rem",
-    marginInline: "1rem",
+    marginInline: "0.6rem",
   },
 };
 
@@ -58,7 +58,7 @@ const SoftBox = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.between("xs", "sm")]: {
     minHeight: "13%",
-    maxWidth: "50%",
+    minWidth: "70%",
     margin: "3rem",
   },
   [theme.breakpoints.between("sm", "md")]: {
@@ -77,6 +77,10 @@ const IconsBox = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-evenly",
   marginTop: "5%",
+  [theme.breakpoints.between("xs", "sm")]: {
+    minHeight: "13%",
+    minWidth: "70%",
+  },
 }));
 
 export default function Home() {
@@ -86,22 +90,19 @@ export default function Home() {
   const { ref: git, inView: gitInView } = useInView();
   const { ref: insta, inView: instaInView } = useInView();
   const { ref: linkedin, inView: linkedinInView } = useInView();
-  console.log(bioInView);
+
+  const isMobile = useMediaQuery("(max-width:599px)");
+  // console.log(isMobile);
+
   return (
     <>
       <StyledBox>
         <ThemeProvider theme={theme}>
-          <Typography gutterBottom variant="h5" color="white" display={"block"}>
+          <Typography gutterBottom variant="h5" color="white">
             Hello ,I am
           </Typography>
           <Fade in={inView} timeout={900}>
-            <Typography
-              gutterBottom
-              variant="h1"
-              color="white"
-              display={"block"}
-              ref={ref}
-            >
+            <Typography gutterBottom variant="h1" color="white" ref={ref}>
               Abhinay Jetti
             </Typography>
           </Fade>
@@ -126,6 +127,7 @@ export default function Home() {
               <GitHubIcon
                 ref={git}
                 sx={{
+                  marginInline: "0.9rem",
                   fontSize: "3rem",
                   "&:hover": {
                     cursor: "pointer",
@@ -146,6 +148,7 @@ export default function Home() {
               <LinkedInIcon
                 ref={linkedin}
                 sx={{
+                  marginInline: "0.9rem",
                   fontSize: "3rem",
                   "&:hover": {
                     cursor: "pointer",
@@ -168,6 +171,7 @@ export default function Home() {
                 ref={insta}
                 sx={{
                   fontSize: "3rem",
+                  marginInline: "0.9rem",
                   "&:hover": {
                     cursor: "pointer",
                   },
@@ -179,7 +183,7 @@ export default function Home() {
       </StyledBox>
       <Fade in={bioInView} timeout={2000}>
         {/* <Box ref={bio}> */}
-          <CardComponent ref={bio} />
+        <CardComponent ref={bio} />
         {/* </Box> */}
       </Fade>
     </>
